@@ -1247,8 +1247,9 @@ button {
 
 /* === Energy Data === */
 .data-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
   margin-bottom: 3rem;
 }
@@ -1260,6 +1261,8 @@ button {
   justify-content: center;
   gap: 0.5rem;
   min-height: 160px;
+  flex: 1 1 220px;
+  max-width: 320px;
   background: var(--card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
@@ -1937,6 +1940,13 @@ button {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+[data-theme='light'] .section-title h2 {
+  color: var(--primary);
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
 }
 
 .hero {

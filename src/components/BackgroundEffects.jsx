@@ -39,29 +39,29 @@ function BackgroundEffects() {
     const init = () => {
       stars = []
       const starCount = isMobile
-        ? 30
-        : Math.min(Math.floor((width * height) / 25000), 80)
+        ? 45
+        : Math.min(Math.floor((width * height) / 18000), 120)
       for (let i = 0; i < starCount; i++) {
         stars.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          size: Math.random() * 1.5 + 0.5,
+          size: Math.random() * 1.8 + 0.5,
           opacity: Math.random() * 0.6 + 0.2,
-          speed: Math.random() * 0.2 + 0.05,
+          speed: Math.random() * 0.25 + 0.05,
           twinkleSpeed: Math.random() * 0.02 + 0.005,
           offset: Math.random() * Math.PI * 2,
         })
       }
 
       rings = []
-      const ringCount = isLowPower ? 2 : 4
+      const ringCount = isLowPower ? 3 : 6
       for (let i = 0; i < ringCount; i++) {
         rings.push({
           x: Math.random() * width,
           y: Math.random() * height,
           radius: Math.random() * 100 + 60,
-          maxRadius: Math.random() * 200 + 150,
-          speed: Math.random() * 0.5 + 0.2,
+          maxRadius: Math.random() * 250 + 180,
+          speed: Math.random() * 0.6 + 0.2,
           opacity: Math.random() * 0.15 + 0.05,
         })
       }
@@ -85,10 +85,10 @@ function BackgroundEffects() {
     }
 
     const drawShootingStar = () => {
-      if (isMobile || Math.random() > 0.005) return
+      if (isMobile || Math.random() > 0.015) return
       const x = Math.random() * width
       const y = Math.random() * (height * 0.3)
-      const length = Math.random() * 80 + 40
+      const length = Math.random() * 100 + 60
       const angle = Math.PI / 4
       const gradient = ctx.createLinearGradient(x, y, x - length * Math.cos(angle), y + length * Math.sin(angle))
       gradient.addColorStop(0, 'rgba(0, 230, 118, 0)')

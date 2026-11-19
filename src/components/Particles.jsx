@@ -80,8 +80,8 @@ function Particles() {
       particles = []
       const isMobile = width < 768
       const areaFactor = (width * height) / (1920 * 1080)
-      const baseCount = isMobile ? 30 : 60
-      const count = Math.min(Math.max(baseCount, Math.floor(baseCount * areaFactor)), isMobile ? 45 : 80)
+      const baseCount = isMobile ? 40 : 90
+      const count = Math.min(Math.max(baseCount, Math.floor(baseCount * areaFactor)), isMobile ? 60 : 130)
       for (let i = 0; i < count; i++) {
         particles.push(new Particle())
       }
