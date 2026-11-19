@@ -248,7 +248,7 @@ export const translations = {
     },
     install: 'Установить',
     footer: {
-      copy: '© 2026 EnergoBel. Проект для IT-рейтинга.',
+      copy: '© 2026 EnergoBel. Проект для Энергомарафона.',
       slogan: 'Энергосбережение — шаг к чистой планете.',
     },
   },
@@ -501,7 +501,7 @@ export const translations = {
     },
     install: 'Усталяваць',
     footer: {
-      copy: '© 2026 EnergoBel. Праект для ІТ-рэйтынгу.',
+      copy: '© 2026 EnergoBel. Праект для Энергамарафона.',
       slogan: 'Энергазбераганне — крок да чыстай планеты.',
     },
   },
