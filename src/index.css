@@ -217,23 +217,8 @@ button {
   flex-shrink: 0;
 }
 
-.nav a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary);
-  transition: width 0.3s;
-}
-
 .nav a:hover {
   color: var(--primary);
-}
-
-.nav a:hover::after {
-  width: 100%;
 }
 
 .hamburger {
@@ -956,39 +941,34 @@ button {
   box-shadow: var(--glow);
 }
 
-/* === Comparison Slider === */
+/* === Comparison === */
 .comparison-wrapper {
   max-width: 900px;
   margin: 0 auto;
 }
 
 .comparison-track {
-  position: relative;
-  height: 320px;
+  display: grid;
+  grid-template-columns: 1fr 2px 1fr;
+  min-height: 320px;
   border-radius: var(--radius);
   overflow: hidden;
-  cursor: ew-resize;
   border: 1px solid var(--card-border);
   box-shadow: var(--shadow);
-  user-select: none;
-  touch-action: none;
 }
 
-.comparison-layer {
-  position: absolute;
-  inset: 0;
+.comparison-half {
   display: flex;
   align-items: center;
+  min-height: 320px;
 }
 
 .comparison-old {
-  background: linear-gradient(135deg, #2a1515, #1a0b0b);
-  z-index: 1;
+  background: color-mix(in srgb, var(--danger) 12%, var(--bg-light));
 }
 
 .comparison-new {
-  background: linear-gradient(135deg, #0b1f0b, #051205);
-  z-index: 2;
+  background: color-mix(in srgb, var(--primary) 12%, var(--bg-light));
 }
 
 .comparison-content {
@@ -1021,12 +1001,12 @@ button {
 }
 
 .comparison-label.red {
-  background: rgba(255, 82, 82, 0.2);
-  color: #ff8a80;
+  background: color-mix(in srgb, var(--danger) 20%, transparent);
+  color: var(--danger);
 }
 
 .comparison-label.green {
-  background: rgba(0, 230, 118, 0.2);
+  background: color-mix(in srgb, var(--primary) 20%, transparent);
   color: var(--primary);
 }
 
@@ -1037,7 +1017,7 @@ button {
 }
 
 .comparison-old .comparison-value {
-  color: #ff8a80;
+  color: var(--danger);
 }
 
 .comparison-new .comparison-value {
@@ -1045,35 +1025,15 @@ button {
 }
 
 .comparison-divider {
-  position: absolute;
-  top: 0;
-  bottom: 0;
   width: 2px;
   background: var(--primary);
-  z-index: 3;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--glow);
-}
-
-.comparison-handle {
-  background: var(--primary);
-  color: var(--bg);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
   box-shadow: var(--glow);
 }
 
 @media (max-width: 768px) {
-  .comparison-track {
-    height: 360px;
+  .comparison-track,
+  .comparison-half {
+    min-height: 360px;
   }
 
   .comparison-content {

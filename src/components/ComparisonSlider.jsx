@@ -1,4 +1,3 @@
-import { useState, useRef } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 
 const TARIFF = 0.35
@@ -17,29 +16,6 @@ function calcAnnualKwh(watts) {
 
 export default function ComparisonSlider() {
   const { t } = useLanguage()
-  const [position, setPosition] = useState(50)
-  const [dragging, setDragging] = useState(false)
-  const trackRef = useRef(null)
-
-  const handleMove = (clientX) => {
-    if (!trackRef.current) return
-    const rect = trackRef.current.getBoundingClientRect()
-    const x = clientX - rect.left
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
-    setPosition(percentage)
-  }
-
-  const startDrag = (e) => {
-    setDragging(true)
-    handleMove(e.clientX ?? e.touches?.[0]?.clientX)
-  }
-
-  const move = (e) => {
-    if (!dragging) return
-    handleMove(e.clientX ?? e.touches?.[0]?.clientX)
-  }
-
-  const endDrag = () => setDragging(false)
 
   const oldCost = calcAnnualCost(60)
   const newCost = calcAnnualCost(10)
@@ -56,18 +32,8 @@ export default function ComparisonSlider() {
       </div>
 
       <div className="comparison-wrapper">
-        <div
-          ref={trackRef}
-          className="comparison-track"
-          onMouseDown={startDrag}
-          onMouseMove={move}
-          onMouseUp={endDrag}
-          onMouseLeave={endDrag}
-          onTouchStart={startDrag}
-          onTouchMove={move}
-          onTouchEnd={endDrag}
-        >
-          <div className="comparison-layer comparison-old">
+        <div className="comparison-track">
+          <div className="comparison-half comparison-old">
             <div className="comparison-content left">
               <span className="comparison-label red">{t.comparison.old}</span>
               <div className="comparison-value">60W</div>
@@ -76,10 +42,8 @@ export default function ComparisonSlider() {
               <p>💸 {oldCost.toFixed(0)} BYN/{t.comparison.year}</p>
             </div>
           </div>
-          <div
-            className="comparison-layer comparison-new"
-            style={{ clipPath: `inset(0 0 0 ${position}%)` }}
-          >
+          <div className="comparison-divider" />
+          <div className="comparison-half comparison-new">
             <div className="comparison-content right">
               <span className="comparison-label green">{t.comparison.new}</span>
               <div className="comparison-value">10W</div>
@@ -87,9 +51,6 @@ export default function ComparisonSlider() {
               <p>⏱ 50 000 {t.comparison.hours}</p>
               <p>💰 {newCost.toFixed(0)} BYN/{t.comparison.year}</p>
             </div>
-          </div>
-          <div className="comparison-divider" style={{ left: `${position}%` }}>
-            <span className="comparison-handle">↔</span>
           </div>
         </div>
 
