@@ -1,7 +1,26 @@
+import { useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import { useTheme } from '../context/ThemeContext'
 
 function Header() {
   const { lang, setLang, t } = useLanguage()
+  const { theme, toggleTheme } = useTheme()
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const links = [
+    { href: '#facts', label: t.header.facts },
+    { href: '#why', label: t.header.why },
+    { href: '#energy', label: t.header.energy },
+    { href: '#timeline', label: t.header.timeline },
+    { href: '#map', label: t.header.map },
+    { href: '#calculator', label: t.header.calculator },
+    { href: '#tips', label: t.header.tips },
+    { href: '#quiz', label: t.header.quiz },
+    { href: '#glossary', label: t.header.glossary },
+    { href: '#game', label: t.header.game },
+    { href: '#checklist', label: lang === 'by' ? 'Чэк-ліст' : 'Чек-лист' },
+    { href: '#contact', label: lang === 'by' ? 'Зваротная сувязь' : 'Обратная связь' },
+  ]
 
   return (
     <header className="header">
@@ -10,21 +29,41 @@ function Header() {
           <span className="logo-icon">⚡</span>
           <span>{t.header.logo}</span>
         </div>
-        <nav className="nav">
-          <a href="#facts">{t.header.facts}</a>
-          <a href="#why">{t.header.why}</a>
-          <a href="#energy">{t.header.energy}</a>
-          <a href="#timeline">{t.header.timeline}</a>
-          <a href="#map">{t.header.map}</a>
-          <a href="#calculator">{t.header.calculator}</a>
-          <a href="#tips">{t.header.tips}</a>
-          <a href="#quiz">{t.header.quiz}</a>
-          <a href="#glossary">{t.header.glossary}</a>
-          <a href="#game">{t.header.game}</a>
+
+        <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
-        <div className="lang-switcher">
-          <button className={lang === 'ru' ? 'active' : ''} onClick={() => setLang('ru')}>RU</button>
-          <button className={lang === 'by' ? 'active' : ''} onClick={() => setLang('by')}>BY</button>
+
+        <div className="header-controls">
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему'}
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+          <div className="lang-switcher">
+            <button className={lang === 'ru' ? 'active' : ''} onClick={() => setLang('ru')}>RU</button>
+            <button className={lang === 'by' ? 'active' : ''} onClick={() => setLang('by')}>BY</button>
+          </div>
+          <button
+            className={`hamburger ${menuOpen ? 'open' : ''}`}
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
+            aria-expanded={menuOpen}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </div>
     </header>

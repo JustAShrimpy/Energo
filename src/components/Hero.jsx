@@ -54,6 +54,7 @@ function Hero() {
           {accent && <span>{accent}</span>}
         </h1>
         <p className="animate-fade-in">{t.hero.subtitle}</p>
+        <p className="hero-mission animate-fade-in">{t.hero.mission}</p>
         <div className="hero-buttons animate-fade-in">
           <a href="#calculator" className="btn btn-primary">
             {t.hero.calculator}

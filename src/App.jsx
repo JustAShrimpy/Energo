@@ -1,7 +1,9 @@
 import './index.css'
 import { Suspense, lazy } from 'react'
 import { LanguageProvider } from './context/LanguageContext'
+import { ThemeProvider } from './context/ThemeContext'
 import Particles from './components/Particles'
+import BackgroundEffects from './components/BackgroundEffects'
 import SideRails from './components/SideRails'
 import Loader from './components/Loader'
 import InstallPrompt from './components/InstallPrompt'
@@ -21,13 +23,17 @@ const Tips = lazy(() => import('./components/Tips'))
 const Quiz = lazy(() => import('./components/Quiz'))
 const Glossary = lazy(() => import('./components/Glossary'))
 const EnergyGame = lazy(() => import('./components/EnergyGame'))
+const Checklist = lazy(() => import('./components/Checklist'))
+const ContactForm = lazy(() => import('./components/ContactForm'))
 const Footer = lazy(() => import('./components/Footer'))
 
 function App() {
   return (
     <LanguageProvider>
-      <div className="app">
+      <ThemeProvider>
+        <div className="app">
         <Particles />
+        <BackgroundEffects />
         <SideRails />
         <Suspense fallback={<Loader />}>
           <Header />
@@ -69,11 +75,18 @@ function App() {
             <EnergyGame />
           </Reveal>
           <Reveal>
+            <Checklist />
+          </Reveal>
+          <Reveal>
+            <ContactForm />
+          </Reveal>
+          <Reveal>
             <Footer />
           </Reveal>
           <InstallPrompt />
         </Suspense>
       </div>
+      </ThemeProvider>
     </LanguageProvider>
   )
 }
