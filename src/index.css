@@ -185,14 +185,26 @@ button {
   display: flex;
   gap: 1.25rem;
   overflow-x: auto;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--bg-light);
   flex: 1 1 auto;
   min-width: 0;
   align-items: center;
+  padding-bottom: 0.5rem;
 }
 
 .nav::-webkit-scrollbar {
-  display: none;
+  height: 6px;
+}
+
+.nav::-webkit-scrollbar-track {
+  background: var(--bg-light);
+  border-radius: 3px;
+}
+
+.nav::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
 }
 
 .nav a {
@@ -202,6 +214,7 @@ button {
   transition: all 0.3s;
   position: relative;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav a::after {
@@ -230,8 +243,8 @@ button {
   gap: 5px;
   width: 36px;
   height: 36px;
-  background: transparent;
-  border: 1px solid var(--card-border);
+  background: var(--bg-light);
+  border: 1px solid var(--text-muted);
   border-radius: 8px;
   padding: 6px;
   cursor: pointer;
@@ -271,7 +284,7 @@ button {
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
-    padding: 1rem 2rem;
+    padding: 0 2rem;
     background: var(--bg);
     border-bottom: 1px solid var(--card-border);
     backdrop-filter: blur(12px);
@@ -283,8 +296,9 @@ button {
   }
 
   .nav.open {
-    max-height: 500px;
+    max-height: 80vh;
     padding: 1rem 2rem;
+    overflow-y: auto;
   }
 
   .nav a {
